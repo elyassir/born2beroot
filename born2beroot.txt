@@ -1,0 +1,8 @@
+
+---WHAT IS A VIRTUAL MACHINE?----
+
+A virtual machine is a software capable of installing an Operating System within itself, making the OS think that it is hosted on a real computer.
+With virtual machines we can create virtual devices that will behave in the same way as physical devices, using their own CPU, memory, network interface and storage.
+The software program that creates virtual machines is the hypervisor.
+The hypervisor is responsible for isolating the VM resources from the system hardware and making the necessary implementations so that the VM can use these resources.
+
