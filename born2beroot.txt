@@ -1,8 +1,66 @@
 
----WHAT IS A VIRTUAL MACHINE?----
+--- WHAT IS A VIRTUAL MACHINE? ----
 
 A virtual machine is a software capable of installing an Operating System within itself, making the OS think that it is hosted on a real computer.
 With virtual machines we can create virtual devices that will behave in the same way as physical devices, using their own CPU, memory, network interface and storage.
 The software program that creates virtual machines is the hypervisor.
 The hypervisor is responsible for isolating the VM resources from the system hardware and making the necessary implementations so that the VM can use these resources.
+The hypervisor uses a part of the host machine's CPU, storage, etc., and distributes them among the different VMs.
 
+The devices that provide the hardware resources are called host machines or hosts.
+The different virtual machines that can be assigned to a host are called guests or guest machines.
+
+There can be multiple virtual machines on the same host and each of these will be isolated from the rest of the system.
+Each of these operating systems will behave as if they were hosted on a physical device, so we will have the same experience when using an OS on a physical machine and on a virtual machine.
+
+---- How do Virtual Machines work? ----
+
+When an user from a VM do a task that requires additional resources from the physical environment, the hypervisor manages the request so that the guest OS could access the resources of the physical environment.
+
+---- Advantages? ----
+Different guest machines hosted on our computer can run different operating systems, so we will have different OS working on the same machine.
+They provide an environment in which to safely test unstable programs to see if they will affect the system or not.
+We reduce costs.
+They are easy to implement because they provide mechanisms to clone a virtual machine to another physical device.
+
+
+---- What is LVM? ----
+
+LVM (Logical Volume Manager) is an abstraction layer between a storage device and a file system.
+
+---- Advantages From Using LVM ---
+
+Suppose we create four partitions on our storage disk. If for any reason we need to expand the storage of the first three partitions, we will not be able to because there is no space available next to them. In case we want to extend the last partition, we will always have the limit imposed by the disk. In other words, we will not be able to manipulate partitions in a friendly way. Thanks to LVM, all these problems are solved.
+By using LVM, we can expand the storage of any partition (now known as a logical volume) whenever we want without worrying about the contiguous space available on each logical volume. We can do this with available storage located on different physical disks (which we cannot do with traditional partitions). We can also move different logical volumes between physical devices. Of course, services and processes will work the same way they always have.
+
+Physical Volume (PV): physical storage device. It can be a hard disk, an SD card, a floppy disk, etc.
+storage available to use.
+Volume Group (VG): to use the space provided by a PV, it must be allocated in a volume group. It is like a virtual storage disk that will be used by logical volumes. VGs can grow over time by adding new PVs.
+Logical volume (LV): these devices will be the ones we will use to create file systems, swaps, virtual machines, etc.
+
+https://www.youtube.com/watch?v=OYqaLUEfl-E
+https://www.youtube.com/watch?v=zkMLzPCXLRo
+
+
+
+---- What is AppArmor? ----
+
+AppArmor provides Mandatory Access Control (MAC) security. In fact, AppAmor allows the system administrator to restrict the actions that processes can perform. For example, if an installed application can take photos by accessing the camera application, but the administrator denies this privilege, the application will not be able to access the camera application. If a vulnerability occurs (some of the restricted tasks are performed), AppArmor blocks the application so that the damage does not spread to the rest of the system.
+
+
+---- What is the difference between Apt and Aptitute? ----
+Aptitude is a high-level package manager while APT is lower-level package manager which can be used by other 
+higher-level package managers
+
+Aptitude is vaster in functionality than apt-get and integrates functionalities of apt-get and its other variants including apt-mark and apt-cache.
+
+While apt-get handles all the package installation, up-gradation, system-upgradation, purging package, resolving dependencies etc., Aptitude handles lot more stuff than apt, including functionalities of apt-mark and apt-cache i.e. searching for a package in list of installed packages, marking a package to be automatically or manually installed, holding a package making it unavailable for up-gradation and so on.
+
+While apt-get lacks UI, Aptitude has a text-only and interactive UI
+
+
+---- What is cron and what is wall? ----
+
+Cron: Linux task manager that allows us to execute commands at a certain time. We can automate some tasks just by telling cron what command we want to run at a specific time. For example, if we want to restart our server every day at 4:00 am, instead of having to wake up at that time, cron will do it for us.
+
+Wall: command used by the root user to send a message to all users currently connected to the server. If the system administrator wants to alert about a major server change that could cause users to log out, the root user could alert them with wall.
