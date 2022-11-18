@@ -83,3 +83,54 @@ Hashing: another form of cryptography used by SSH. Hash functions are made in a 
 Virtualization allow us share a system with multiple virtual environments
 manages the hardware system and separate the physical resources from the virtual environments
 
+----------------sudo apt-get install libpam-pwquality------------------/etc/pam.d/common-password------------------------------------------
+-The password must not include the name of the user.
+reject_username.
+
+-It must contain an uppercase , lowercase letter and a number.
+lcredit=1 ucredit=-1 dcredit=-1.
+
+-Your password must be at least 10 characters long.
+minlen=10.
+
+-It must not contain more than 3 consecutive identical characters.
+retry=3 .
+
+-The following rule does not apply to the root password: The password must have at least 7 characters that are not part of the former password.
+difok=7 && you can't make difok work for root and not that you must create a separate rule for root.
+
+
+-Of course, your root password has to comply with this policy.
+enforce_for_root..
+
+
+
+
+-----------/etc/login.defs---------------
+PASS_MAX_DAYS   30  //  expire every 30 days
+PASS_MIN_DAYS   2   // modification of a password will be set to 2.
+PASS_WARN_AGE   7   // receive a warning message 7 days before their password expires.
+
+
+Sudo chage -l yel-mass // Verify newly-created user's password expiry information
+
+
+------------Creating a New Group----------
+sudo addgroup user42            // Create new user42 group
+sudo adduser yew-mass user42 // Add user to user42 group 
+getent group user42.      //Verify whether user was successfully added to user42 group
+
+
+
+
+-----------Setting Up a cron Job--------------
+
+Configure cron as root via switch to root
+crontab -e
+
+
+
+To schedule a shell script to run every 10 minutes, replace below line
+*/10 * * * * sh /home/yel-mass/monitoring.sh.
+
+$ sudo crontab -l /// Check root's scheduled cron jobs
