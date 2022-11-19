@@ -1,3 +1,10 @@
+-------sudo
+
+
+$ su - // Switch to root
+apt install sudo // Install sudo
+dpkg -l | grep sudo //  Verify whether sudo was successfully installed
+
 
 --- WHAT IS A VIRTUAL MACHINE? ----
 
@@ -47,6 +54,8 @@ https://www.youtube.com/watch?v=zkMLzPCXLRo
 
 AppArmor provides Mandatory Access Control (MAC) security. In fact, AppAmor allows the system administrator to restrict the actions that processes can perform. For example, if an installed application can take photos by accessing the camera application, but the administrator denies this privilege, the application will not be able to access the camera application. If a vulnerability occurs (some of the restricted tasks are performed), AppArmor blocks the application so that the damage does not spread to the rest of the system.
 
+
+sudo service apparmor status // AppArmor for Debian must be running at startup too
 
 ---- What is the difference between Apt and Aptitute? ----
 Aptitude is a high-level package manager while APT is lower-level package manager which can be used by other 
@@ -115,13 +124,14 @@ PASS_WARN_AGE   7   // receive a warning message 7 days before their password ex
 Sudo chage -l yel-mass // Verify newly-created user's password expiry information
 
 
-------------Creating a New Group----------
-sudo addgroup user42            // Create new user42 group
-sudo adduser yew-mass user42 // Add user to user42 group 
-getent group user42.      //Verify whether user was successfully added to user42 group
+------------Creating a New Group--------And--Adding User to the Group
 
 
-
+sudo addgroup user42            	// Create new user42 group
+sudo adduser yel-mass user42 		// Add user to user42 group 
+getent group user42.      		// Verify whether user was successfully added to user42 group
+reboot						// for changes to take effect
+udo apt update					// Running root-Privileged Commands
 
 -----------Setting Up a cron Job--------------
 
@@ -134,3 +144,57 @@ To schedule a shell script to run every 10 minutes, replace below line
 */10 * * * * sh /home/yel-mass/monitoring.sh.
 
 $ sudo crontab -l /// Check root's scheduled cron jobs
+
+
+
+
+
+*///////-------****
+
+
+
+
+
+
+-------*****************---------Configuring sudoers------***********--------------
+Go to file:
+
+$ sudo nano /etc/sudoers
+
+
+to be limited to 3 attempts in the event of an incorrect password:
+Defaults     passwd_tries=3
+
+For wrong password warning message, add:
+Defaults     badpass_message="lalal mabghitch".
+
+
+Each action log file has to be saved in the /var/log/sudo/ folder:
+(If there is no “/var/log/sudo” folder, create the sudo folder inside of “/var/log”)
+
+
+Defaults	logfile="/var/log/sudo/sudo.log"
+Defaults	log_input,log_output
+
+
+
+************---------------Why use tty***************--------------
+
+
+
+
+
+
+
+
+
+
+
+
+******** Change hostname (!!!This is for when you defend!!!)----------------
+$ hostnamectl 				// Check current hostname
+$ hostnamectl set-hostname new_hostname //  Change the hostname
+$ sudo nano /etc/hosts 		    // Change /etc/hosts file
+127.0.0.1       localhost		  // Change old_hostname
+127.0.0.1       new_hostname         // with new_hostname
+$ sudo reboot               //Reboot and check the change
